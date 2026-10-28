@@ -9,6 +9,7 @@ export type Filters = {
   keyword: string;
   platform: Platform | "all";
   minOutlier: number;
+  watchlistOnly: boolean;
 };
 
 const platforms: { value: Filters["platform"]; label: string }[] = [
@@ -28,9 +29,10 @@ const outlierSteps = [
 type Props = {
   filters: Filters;
   onChange: (f: Filters) => void;
+  watchlistCount: number;
 };
 
-export function FilterBar({ filters, onChange }: Props) {
+export function FilterBar({ filters, onChange, watchlistCount }: Props) {
   return (
     <div className="space-y-3 rounded-lg border border-border bg-card p-4">
       <div className="relative">
@@ -74,6 +76,17 @@ export function FilterBar({ filters, onChange }: Props) {
               </Button>
             ))}
           </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-muted-foreground">Channels</span>
+          <Button
+            size="sm"
+            variant={filters.watchlistOnly ? "default" : "outline"}
+            onClick={() => onChange({ ...filters, watchlistOnly: !filters.watchlistOnly })}
+          >
+            Watchlist only ({watchlistCount})
+          </Button>
         </div>
       </div>
     </div>

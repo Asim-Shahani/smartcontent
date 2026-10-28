@@ -20,6 +20,7 @@ import { useIdeas } from "@/store/ideas";
 import { useSavedHooks } from "@/store/hooks";
 import { useProjects } from "@/store/projects";
 import { useAccounts } from "@/store/accounts";
+import { useWatchlist } from "@/store/watchlist";
 export function TopBar() {
   const balance = useCredits((s) => s.balance);
 
@@ -30,6 +31,7 @@ export function TopBar() {
     useSavedHooks.persist.rehydrate();
     useProjects.persist.rehydrate();
     useAccounts.persist.rehydrate();
+    useWatchlist.persist.rehydrate();
   }, []);
 
   return (
